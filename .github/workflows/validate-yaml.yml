@@ -28,4 +28,4 @@ jobs:
 
       - name: Validate YAML against schema
         working-directory: ${{github.workspace}}/registry_tools
-        run: find .. -type f -name "*.yaml" -exec python validator.py {} \;
+        run: find .. -type f -name "*.yaml" -print -exec python validator.py {} \;
