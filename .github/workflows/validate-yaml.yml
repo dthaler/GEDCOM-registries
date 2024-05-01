@@ -17,31 +17,15 @@ permissions:
 jobs:
   validate-yaml:
     runs-on: ubuntu-latest
-    env:
-      REGISTRY_DIRECTORIES: calendar/standard data-type/standard enumeration/standard enumeration-set/standard month/standard structure/extension structure/standard uri/exid-types
-
     steps:
       - name: Checkout GEDCOM.io
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
-      - name: Validate YAML1
-        run: |
-          yamllint . calendar/standard data-type/standard enumeration/standard enumeration-set/standard month/standard structure/extension structure/standard uri/exid-types
-
-      - name: Validate YAML2
-        run: |
-          yamllint calendar/standard/cal-FRENCH_R.yaml
-          echo DIRS: $REGISTRY_DIRECTORIES
-          yamllint . $REGISTRY_DIRECTORIES
+      - name: Validate YAML
+        run: yamllint .
 
       - name: Validate YAML against schema
         working-directory: ${{github.workspace}}/registry_tools
-        run: |
-          for dir in $REGISTRY_DIRECTORIES; do
-            for filename in ../$dir/*; do
-              echo Validating $filename
-              python validator.py $filename
-            done
-          done
+        run: find .. -type f -name "*.yaml" -exec python validator.py {} \;
