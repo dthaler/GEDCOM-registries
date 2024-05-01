@@ -1,3 +1,5 @@
+%YAML 1.2
+---
 lang: en-US
 
 type: calendar
@@ -6,7 +8,7 @@ uri: https://gedcom.io/terms/v7/cal-FRENCH_R
 
 standard tag: FRENCH_R
 
-spec:
+specification:
   - |
     The French Republican calendar or French Revolutionary calendar are the names
     given to the new calendar adopted in 1794 by the French National Convention.
