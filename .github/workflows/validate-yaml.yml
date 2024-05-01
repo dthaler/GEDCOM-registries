@@ -17,10 +17,22 @@ permissions:
 jobs:
   validate-yaml:
     runs-on: ubuntu-latest
+    env:
+      REGISTRY_DIRECTORIES: calendar/standard data-type/standard enumeration/standard enumeration-set/standard month/standard structure/extension structure/standard uri/exid-types
 
     steps:
       - name: Checkout GEDCOM.io
         uses: actions/checkout@v4
 
       - name: Validate YAML
-        run: yamllint . .github .github/workflows calendar/standard data-type/standard enumeration/standard enumeration-set/standard month/standard structure/extension structure/standard uri/exid-types
+        run: yamllint . .github .github/workflows $REGISTRY_DIRECTORIES
+
+      - name: Validate YAML against schema
+        run: |
+          for dir in $DIRECTORIES; do
+            echo DIR: $dir
+            for filename in "$dir"/*; do
+              echo FILE: $filename
+              python registry_tools/validator.py "$filename"
+            done
+          done
