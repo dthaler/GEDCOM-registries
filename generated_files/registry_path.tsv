@@ -1,4 +1,5 @@
 uri	yaml_path
+https://gedcom.io/exid-type/GOV-ID	uri/exid-types/GOV-ID.yaml
 https://gedcom.io/terms/v7/ABBR	structure/standard/ABBR.yaml
 https://gedcom.io/terms/v7/ADDR	structure/standard/ADDR.yaml
 https://gedcom.io/terms/v7/ADOP	structure/standard/ADOP.yaml
